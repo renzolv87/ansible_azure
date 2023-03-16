@@ -32,33 +32,20 @@
         name: "{{ public_ip_name }}"
       when: public_ip is defined and public_ip|bool
 
-    - name: Create security group that allows RDP
+    - name: Create security group that allows SSH and ICMP
       azure_rm_securitygroup:
-        resource_group: "{{ rg }}"
         name: "{{ security_group_name }}"
-        rules:
-          - name: 'allow_rdp'
-            protocol: Tcp
-            destination_port_range: 3389
-            access: Allow
-            priority: 1001
-            direction: Inbound
-          - name: 'allow_web_traffic'
-            protocol: Tcp
-            destination_port_range:
-              - 80
-              - 443
-            access: Allow
-            priority: 1002
-            direction: Inbound
-          - name: 'allow_powershell_remoting'
-            protocol: Tcp
-            destination_port_range: 
-              - 5985
-              - 5986
-            access: Allow
-            priority: 1003
-            direction: Inbound
+        resource_group: "{{ rg }}"
+      rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 105
+        direction: Inbound
+      - name: ICMP
+        protocol: Icmp
+        priority: 106
     
     - name: Create NIC
       azure_rm_networkinterface:
@@ -73,8 +60,8 @@
       azure_rm_virtualmachine:
         resource_group: "{{ rg }}"
         name: "{{ vm_name }}"
-        vm_size: "{{ vm_size }}"
-        managed_disk_type: "{{ disk_type }}"
+        vm_size: "Standard_DS1_v2"
+        managed_disk_type: "Standard_LRS"
         admin_username: root
         admin_password: "{{ password }}"
         network_interfaces: "{{ nic_name }}"
