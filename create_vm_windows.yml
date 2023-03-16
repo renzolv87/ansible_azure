@@ -90,5 +90,5 @@
         append_tags: true
         tags: |
           "{{ tags }}"
-      no_log: true
+      #no_log: true
 
