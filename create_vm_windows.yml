@@ -73,11 +73,11 @@
     #       primary: True
 
    
-    - debug:
-        var: "{{ tags }}"
+    # - debug:
+    #     var: "{{ tags }}"
 
-    - debug:
-        var: "{{ tags | from_yaml }}"
+    # - debug:
+    #     var: "{{ tags | from_yaml }}"
 
     - fail:
 
@@ -98,6 +98,6 @@
             version: latest
         append_tags: true
         tags: |
-          "{{ tags | from_yaml }}"
+          "{{ tags | to_json }}"
       #no_log: true
 
