@@ -1,0 +1,15 @@
+---
+- name: Remove Azure VM with associated resources
+  hosts: localhost
+  connection: local
+  
+  collections:
+    - azure.azcollection
+
+  tasks:    
+    - name: Remove virtual machine and resources
+      azure_rm_virtualmachine:
+        resource_group: "{{ rg }}"
+        name: "{{ vm_name }}"
+        remove_on_absent: all
+        state: absent
