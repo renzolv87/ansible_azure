@@ -71,7 +71,7 @@
         - name: ipconfig1
           public_ip_address_name: "{{ public_ip_name }}"
           primary: True
-              
+
     - name: Create virtual machine
       azure_rm_virtualmachine:
         resource_group: "{{ rg }}"
@@ -87,5 +87,5 @@
             publisher: MicrosoftWindowsServer
             sku: 2019-Datacenter
             version: latest
-      #no_log: true
+      no_log: true
 
