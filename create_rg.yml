@@ -11,4 +11,7 @@
       azure_rm_resourcegroup:
         name: "{{ rg }}"
         location: "{{ location }}"
+        append_tags: true
+        tags: |
+          "{{ tags }}"
 
