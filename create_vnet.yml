@@ -1,0 +1,34 @@
+---
+- name: Create RG in Azure
+  hosts: localhost
+  connection: local
+  
+  collections:
+    - azure.azcollection
+  
+  tasks:
+    - name: Creating resource group
+      azure_rm_resourcegroup:
+        name: "{{ rg }}"
+        location: "{{ location }}"
+
+    - name: Create virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ rg }}"
+        name: "{{ vnet_name }}"
+        address_prefixes: "{{ vnet_prefix }}"
+    
+    - name: Add subnet
+      azure_rm_subnet:
+        resource_group: "{{ rg }}"
+        name: "{{ subnet_name }}"
+        address_prefix: "{{ subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+    
+    - name: Create public ip
+      azure_rm_publicipaddress:
+        resource_group: "{{ rg }}"
+        allocation_method: Static
+        name: "{{ public_ip_name }}"
+      when: public_ip is defined and public_ip|bool
+
