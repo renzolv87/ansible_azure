@@ -89,6 +89,6 @@
             version: latest
         append_tags: true
         tags: |
-          "{{ tags }}"
+          "{{ tags | list }}"
       #no_log: true
 
