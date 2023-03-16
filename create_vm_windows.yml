@@ -89,6 +89,6 @@
             version: latest
         append_tags: true
         tags: |
-          "{{ tags | list }}"
+          "{{ tags | from_yaml }}"
       #no_log: true
 
