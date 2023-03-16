@@ -36,16 +36,16 @@
       azure_rm_securitygroup:
         name: "{{ security_group_name }}"
         resource_group: "{{ rg }}"
-      rules:
-      - name: SSH
-        protocol: Tcp
-        destination_port_range: 22
-        access: Allow
-        priority: 105
-        direction: Inbound
-      - name: ICMP
-        protocol: Icmp
-        priority: 106
+        rules:
+        - name: SSH
+          protocol: Tcp
+          destination_port_range: 22
+          access: Allow
+          priority: 105
+          direction: Inbound
+        - name: ICMP
+          protocol: Icmp
+          priority: 106
     
     - name: Create NIC
       azure_rm_networkinterface:
