@@ -66,9 +66,12 @@
         name: "{{ nic_name }}"
         virtual_network: "{{ vnet_name }}"
         subnet: "{{ subnet_name }}"
-        public_ip_name: "{{ public_ip_name | default }}"
         security_group: "{{ security_group_name }}"
-    
+        ip_configurations:
+        - name: ipconfig1
+          public_ip_address_name: "{{ public_ip_name }}"
+          primary: True
+              
     - name: Create virtual machine
       azure_rm_virtualmachine:
         resource_group: "{{ rg }}"
