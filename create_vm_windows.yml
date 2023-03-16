@@ -75,7 +75,7 @@
         name: "{{ vm_name }}"
         vm_size: "Standard_DS1_v2"
         managed_disk_type: "Standard_LRS"
-        admin_username: Administrator
+        admin_username: tsystems
         admin_password: "{{ password }}"
         network_interfaces: "{{ nic_name }}"
         os_type: Windows
