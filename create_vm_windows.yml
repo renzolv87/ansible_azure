@@ -7,70 +7,70 @@
     - azure.azcollection
   
   tasks:
-    - name: Creating resource group
-      azure_rm_resourcegroup:
-        name: "{{ rg }}"
-        location: "{{ location }}"
+    # - name: Creating resource group
+    #   azure_rm_resourcegroup:
+    #     name: "{{ rg }}"
+    #     location: "{{ location }}"
 
-    - name: Create virtual network
-      azure_rm_virtualnetwork:
-        resource_group: "{{ rg }}"
-        name: "{{ vnet_name }}"
-        address_prefixes: "{{ vnet_prefix }}"
+    # - name: Create virtual network
+    #   azure_rm_virtualnetwork:
+    #     resource_group: "{{ rg }}"
+    #     name: "{{ vnet_name }}"
+    #     address_prefixes: "{{ vnet_prefix }}"
     
-    - name: Add subnet
-      azure_rm_subnet:
-        resource_group: "{{ rg }}"
-        name: "{{ subnet_name }}"
-        address_prefix: "{{ subnet_prefix }}"
-        virtual_network: "{{ vnet_name }}"
+    # - name: Add subnet
+    #   azure_rm_subnet:
+    #     resource_group: "{{ rg }}"
+    #     name: "{{ subnet_name }}"
+    #     address_prefix: "{{ subnet_prefix }}"
+    #     virtual_network: "{{ vnet_name }}"
     
-    - name: Create public ip
-      azure_rm_publicipaddress:
-        resource_group: "{{ rg }}"
-        allocation_method: Static
-        name: "{{ public_ip_name }}"
-      when: public_ip is defined and public_ip|bool
+    # - name: Create public ip
+    #   azure_rm_publicipaddress:
+    #     resource_group: "{{ rg }}"
+    #     allocation_method: Static
+    #     name: "{{ public_ip_name }}"
+    #   when: public_ip is defined and public_ip|bool
 
-    - name: Create security group that allows RDP
-      azure_rm_securitygroup:
-        resource_group: "{{ rg }}"
-        name: "{{ security_group_name }}"
-        rules:
-          - name: 'allow_rdp'
-            protocol: Tcp
-            destination_port_range: 3389
-            access: Allow
-            priority: 1001
-            direction: Inbound
-          - name: 'allow_web_traffic'
-            protocol: Tcp
-            destination_port_range:
-              - 80
-              - 443
-            access: Allow
-            priority: 1002
-            direction: Inbound
-          - name: 'allow_powershell_remoting'
-            protocol: Tcp
-            destination_port_range: 
-              - 5985
-              - 5986
-            access: Allow
-            priority: 1003
-            direction: Inbound
+    # - name: Create security group that allows RDP
+    #   azure_rm_securitygroup:
+    #     resource_group: "{{ rg }}"
+    #     name: "{{ security_group_name }}"
+    #     rules:
+    #       - name: 'allow_rdp'
+    #         protocol: Tcp
+    #         destination_port_range: 3389
+    #         access: Allow
+    #         priority: 1001
+    #         direction: Inbound
+    #       - name: 'allow_web_traffic'
+    #         protocol: Tcp
+    #         destination_port_range:
+    #           - 80
+    #           - 443
+    #         access: Allow
+    #         priority: 1002
+    #         direction: Inbound
+    #       - name: 'allow_powershell_remoting'
+    #         protocol: Tcp
+    #         destination_port_range: 
+    #           - 5985
+    #           - 5986
+    #         access: Allow
+    #         priority: 1003
+    #         direction: Inbound
     
-    - name: Create NIC
-      azure_rm_networkinterface:
-        resource_group: "{{ rg }}"
-        name: "{{ nic_name }}"
-        virtual_network: "{{ vnet_name }}"
-        subnet: "{{ subnet_name }}"
-        security_group: "{{ security_group_name }}"
-        ip_configurations:
-        - name: ipconfig1
-          public_ip_address_name: "{{ public_ip_name }}"
-          primary: True
+    # - name: Create NIC
+    #   azure_rm_networkinterface:
+    #     resource_group: "{{ rg }}"
+    #     name: "{{ nic_name }}"
+    #     virtual_network: "{{ vnet_name }}"
+    #     subnet: "{{ subnet_name }}"
+    #     security_group: "{{ security_group_name }}"
+    #     ip_configurations:
+    #     - name: ipconfig1
+    #       public_ip_address_name: "{{ public_ip_name }}"
+    #       primary: True
 
     - name: Create virtual machine
       azure_rm_virtualmachine:
