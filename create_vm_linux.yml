@@ -72,7 +72,7 @@
         image:
           offer: CentOS
           publisher: OpenLogic
-          sku: '8.7'
+          sku: '7.1'
           version: latest
       #no_log: true
 
