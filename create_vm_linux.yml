@@ -74,5 +74,5 @@
           publisher: OpenLogic
           sku: '8.7'
           version: latest
-      no_log: true
+      #no_log: true
 
