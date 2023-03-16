@@ -1,5 +1,5 @@
 ---
-- name: Create RG in Azure
+- name: Create Network in Azure
   hosts: localhost
   connection: local
   
