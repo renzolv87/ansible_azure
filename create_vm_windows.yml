@@ -87,5 +87,8 @@
             publisher: MicrosoftWindowsServer
             sku: 2019-Datacenter
             version: latest
+        append_tags: true
+        tags: |
+          "{{ tags }}"
       no_log: true
 
