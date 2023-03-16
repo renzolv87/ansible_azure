@@ -8,7 +8,7 @@
   
   tasks:
     - debug:
-        var: tags.splitlines()|map('from_yaml')
+        var: tags.splitlines()|from_yaml)
 
     - name: Creating resource group
       azure_rm_resourcegroup:
@@ -16,5 +16,5 @@
         location: "{{ location }}"
         append_tags: true
         tags: |
-          "{{ tags.splitlines()|map('from_yaml') }}"
+          "{{ tags.splitlines()|from_yaml }}"
 
