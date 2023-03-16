@@ -72,6 +72,11 @@
     #       public_ip_address_name: "{{ public_ip_name }}"
     #       primary: True
 
+    - debug:
+        var: "{{ tags | from_yaml }}"
+
+    - fail:
+    
     - name: Create virtual machine
       azure_rm_virtualmachine:
         resource_group: "{{ rg }}"
