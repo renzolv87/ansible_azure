@@ -1,0 +1,15 @@
+---
+- name: Create RG in Azure
+  hosts: localhost
+  connection: local
+  
+  collections:
+    - azure.azcollection
+  
+  tasks:
+    - name: Delete a resource group including resources it contains
+      azure_rm_resourcegroup:
+        name: "{{ rg }}"
+        force_delete_nonempty: yes
+        state: absent
+
