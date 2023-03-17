@@ -7,14 +7,14 @@
     - azure.azcollection
   
   tasks:
-    - debug:
-        var: tags.splitlines()|from_yaml)
-
+    # - set_fact:
+    #     test: "{{ tags.split(',')  }}"
+    # - debug:
+    #     var: test
+    # #- fail:
     - name: Creating resource group
       azure_rm_resourcegroup:
         name: "{{ rg }}"
         location: "{{ location }}"
         append_tags: true
-        tags: |
-          "{{ tags.splitlines()|from_yaml }}"
-
+        tags: "{{ tags | from_json }}"
