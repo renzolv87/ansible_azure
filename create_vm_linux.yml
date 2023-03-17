@@ -28,8 +28,6 @@
         name: "{{ subnet_name }}"
         address_prefix: "{{ subnet_prefix }}"
         virtual_network: "{{ vnet_name }}"
-        append_tags: true
-        tags: "{{ tags | from_json }}"
     
     - name: Create public ip
       azure_rm_publicipaddress:
