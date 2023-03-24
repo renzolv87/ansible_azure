@@ -18,4 +18,4 @@
         location: "{{ location }}"
         append_tags: true
         tags: "{{ tags | from_json }}"
-        cert_validation_mode: "ignore"
+     
